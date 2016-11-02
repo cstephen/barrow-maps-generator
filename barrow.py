@@ -15,7 +15,6 @@ workingDir = os.environ['DATA_WORKING_DIRECTORY']
 targetDir = os.environ['DATA_TARGET_DIRECTORY']
 
 logging.basicConfig(format = '%(levelname)s: %(message)s', level = logging.DEBUG)
-workingDir = '/tmp'
 jsonFeed = 'http://feeder.gina.alaska.edu/radar-uaf-barrow-seaice-geotif.json'
 
 # Number of layers to process.
