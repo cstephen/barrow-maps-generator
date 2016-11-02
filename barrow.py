@@ -55,7 +55,8 @@ def download(geoTiffUrl):
 
 # Add time stamp to GeoTIFF and properly georeference it in EPSG:3857.
 def stampGeoTiff(rawGeoTiff, dateText, index):
-    finalGeoTiff = targetDir + '/barrow_sea_ice_radar_{0}.tif'.format(index)
+    underscoredDate = dateText.replace(' ', '_')
+    finalGeoTiff = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
     warpedGeoTiff = workingDir + '/warped.tif'
     plainPng = workingDir + '/plain.png'
 
@@ -109,7 +110,8 @@ def stampGeoTiff(rawGeoTiff, dateText, index):
 
 # Create a non-geospatial "No data for [Current Date]" placeholder image.
 def createNoDataImage(dateText, index):
-    noDataImage = targetDir + '/barrow_sea_ice_radar_{0}.tif'.format(index)
+    underscoredDate = dateText.replace(' ', '_')
+    noDataImage = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
     text = 'No data for {0}'.format(dateText);
 
     imageSize = [300, 300]
@@ -124,6 +126,9 @@ def createNoDataImage(dateText, index):
 
     draw.text((position[0], position[1]), text, 255, font=font)
     image.save(noDataImage)
+
+# TODO: When the GeoTIFF feed is being updated again, replace the next few
+# lines of code with just: firstDate = datetime.now()
 
 # Date of the first (most recent) layer in the GeoJSON feed.
 firstDate = dateObject(geoTiffs[0]['event_at'])
