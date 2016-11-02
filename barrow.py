@@ -42,7 +42,7 @@ def dateObject(rawDate):
     return datetime.strptime(match.group(0), '%Y-%m-%dT%H:%M:%S')
 
 def formatDate(dateObj):
-    return dateObj.strftime('%Y-%m-%d %H:%M:%S')
+    return dateObj.strftime('%Y-%m-%d %H:%M')
 
 # Download and save the GeoTIFF file.
 def download(geoTiffUrl):
