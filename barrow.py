@@ -86,7 +86,7 @@ def stampGeoTiff(rawGeoTiff, dateText, index):
 
     font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf", 30)
     textSize = draw.textsize(dateText, font=font)
-    margin = [10, 20]
+    margin = [10, 10]
     position = [0, 0]
     position[0] = image.size[0] - textSize[0] - margin[0]
     position[1] = image.size[1] - textSize[1] - margin[1]
