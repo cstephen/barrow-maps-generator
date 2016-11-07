@@ -34,6 +34,15 @@ acceptableRange = timedelta(minutes=3)
 response = urllib2.urlopen(jsonFeed)
 geoTiffs = json.loads(response.read())
 
+# Delete old files.
+def deleteFiles(directory, maxLayers):
+    for position in range(1, maxLayers + 1):
+        path = "{0}/{1}".format(directory, position)
+        for file in os.listdir(path):
+            fullPath = os.path.join(path, file)
+            if os.path.isfile(fullPath):
+                os.unlink(fullPath)
+
 # Create a datetime object from a date string from the GeoTIFF feed.
 def dateObject(rawDate):
     # Grab the latest GeoTIFF's creation date, throwing out the time zone
@@ -141,6 +150,8 @@ lastDate = firstDate - layerInterval * maxLayers
 # Use these to strictly enforce filing of data into correct sequence position.
 targetPosition = 1
 success = {}
+
+deleteFiles(targetDir, maxLayers)
 
 for sourcePosition in range(0, len(geoTiffs)):
     if(targetPosition > maxLayers):
