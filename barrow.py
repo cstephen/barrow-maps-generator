@@ -24,7 +24,7 @@ maxLayers = 3
 layerInterval = timedelta(minutes=30)
 
 # How recent does the first GeoTIFF need to be?
-offsetFromNow = timedelta(weeks=2)
+offsetFromNow = timedelta(weeks=3)
 
 # Acceptable time buffer before and after target time.
 acceptableRange = timedelta(minutes=3)
@@ -64,7 +64,8 @@ def download(geoTiffUrl):
 
 # Add time stamp to GeoTIFF and properly georeference it in EPSG:3857.
 def stampGeoTiff(rawGeoTiff, dateText, index):
-    finalGeoTiff = targetDir + '/{0}/Barrow Sea Ice ({1}).tif'.format(index, dateText)
+    underscoredDate = dateText.replace(' ', '_').replace(':', '_')
+    finalGeoTiff = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
     warpedGeoTiff = workingDir + '/warped.tif'
     plainPng = workingDir + '/plain.png'
 
@@ -118,7 +119,8 @@ def stampGeoTiff(rawGeoTiff, dateText, index):
 
 # Create a non-geospatial "No data for [Current Date]" placeholder image.
 def createNoDataImage(dateText, index):
-    noDataImage = targetDir + '/{0}/Barrow Sea Ice ({1}).tif'.format(index, dateText)
+    underscoredDate = dateText.replace(' ', '_').replace(':', '_')
+    noDataImage = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
     text = 'No data for {0}'.format(dateText);
 
     imageSize = [300, 300]
