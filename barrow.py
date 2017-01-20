@@ -55,7 +55,7 @@ def formatDate(dateObj):
 
 # Download and save the GeoTIFF file.
 def download(geoTiffUrl):
-    rawGeoTiff = workingDir + '/barrow_raw.tif'
+    rawGeoTiff = workingDir + '/utqiagvik_raw.tif'
     response = urllib2.urlopen(geoTiffUrl)
     localFile = open(rawGeoTiff, 'wb')
     localFile.write(response.read())
@@ -65,7 +65,7 @@ def download(geoTiffUrl):
 # Add time stamp to GeoTIFF and properly georeference it in EPSG:3857.
 def stampGeoTiff(rawGeoTiff, dateText, index):
     underscoredDate = dateText.replace(' ', '_').replace(':', '_')
-    finalGeoTiff = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
+    finalGeoTiff = targetDir + '/{0}/utqiagvik_sea_ice_{1}.tif'.format(index, underscoredDate)
     warpedGeoTiff = workingDir + '/warped.tif'
     plainPng = workingDir + '/plain.png'
 
@@ -120,7 +120,7 @@ def stampGeoTiff(rawGeoTiff, dateText, index):
 # Create a non-geospatial "No data for [Current Date]" placeholder image.
 def createNoDataImage(dateText, index):
     underscoredDate = dateText.replace(' ', '_').replace(':', '_')
-    noDataImage = targetDir + '/{0}/barrow_sea_ice_{1}.tif'.format(index, underscoredDate)
+    noDataImage = targetDir + '/{0}/utqiagvik_sea_ice_{1}.tif'.format(index, underscoredDate)
     text = 'No data for {0}'.format(dateText);
 
     imageSize = [300, 300]
